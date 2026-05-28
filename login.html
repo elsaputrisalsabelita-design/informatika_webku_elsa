@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PIXEL ARTMEDIA - Portal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <style>
+        /* Animasi tambahan untuk halaman Welcome */
+        .welcome-box {
+            text-align: center;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .welcome-box h2 {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .welcome-box h2 span {
+            color: #f33f3f;
+        }
+        .welcome-box p {
+            font-size: 1.1em;
+            color: #666;
+        }
+        .loading-dots span {
+            animation: blink 1.4s infinite both;
+            font-size: 1.5em;
+            color: #f33f3f;
+        }
+        .loading-dots span:nth-child(2) { animation-delay: .2s; }
+        .loading-dots span:nth-child(3) { animation-delay: .4s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes blink {
+            0% { opacity: .2; }
+            20% { opacity: 1; }
+            100% { opacity: .2; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+
+                <div class="login100-pic js-tilt" data-tilt id="portalImage">
+                    <img src="images/img-01.png" alt="IMG">
+                </div>
+
+                <form id="loginForm" class="login100-form validate-form" style="display: block;" onsubmit="prosesLogin(event)">
+                    <span class="login100-form-title">
+                        Member Login
+                    </span>
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" id="username" placeholder="Username" required autocomplete="off">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="password" id="password" placeholder="Password" required>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button type="submit" class="login100-form-btn">
+                            Login
+                        </button>
+                    </div>
+
+                    <div class="text-center p-t-136">
+                        <a class="txt2" href="#" onclick="bukaRegister()">
+                            Create your Account (Register)
+                            <i class="fa fa-long-arrow-right m-l-5"></i>
+                        </a>
+                    </div>
+                </form>
+
+                <form id="registerForm" class="login100-form validate-form" style="display: none;" onsubmit="prosesRegister(event)">
+                    <span class="login100-form-title">
+                        Create Account
+                    </span>
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" id="reg_fullname" placeholder="Full Name" required autocomplete="off">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-id-card"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" id="reg_username" placeholder="Desired Username" required autocomplete="off">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="password" id="reg_password" placeholder="Password" required>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button type="submit" class="login100-form-btn">
+                            Register Now
+                        </button>
+                    </div>
+
+                    <div class="text-center p-t-95">
+                        <a class="txt2" href="#" onclick="bukaLogin()">
+                            <i class="fa fa-long-arrow-left m-r-5"></i>
+                            Already have an account? Login
+                        </a>
+                    </div>
+                </form>
+
+                <div id="welcomeScreen" class="welcome-box" style="display: none;">
+                    <h2>Welcome, <span id="welcomeName">PIXEL ARTMEDIA</span></h2>
+                    <p>Login Berhasil! Menghubungkan ke Dashboard utama</p>
+                    <div class="loading-dots p-t-20">
+                        <span>.</span><span>.</span><span>.</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/tilt/tilt.jquery.min.js"></script>
+    <script>
+        $('.js-tilt').tilt({ scale: 1.1 })
+    </script>
+    <script src="js/main.js"></script>
+
+    <script>
+        function bukaRegister() {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("registerForm").style.display = "block";
+        }
+
+        function bukaLogin() {
+            document.getElementById("registerForm").style.display = "none";
+            document.getElementById("loginForm").style.display = "block";
+        }
+
+        function prosesRegister(event) {
+            event.preventDefault();
+
+            var namaBaru = document.getElementById("reg_fullname").value;
+            var userBaru = document.getElementById("reg_username").value.trim();
+            var passBaru = document.getElementById("reg_password").value;
+
+            if(namaBaru === "" || userBaru === "" || passBaru === "") {
+                alert("Mohon lengkapi seluruh kolom pendaftaran!");
+                return;
+            }
+
+            localStorage.setItem("akun_nama", namaBaru);
+            localStorage.setItem("akun_username", userBaru);
+            localStorage.setItem("akun_password", passBaru);
+
+            alert("Pendaftaran Berhasil! Akun dengan username '" + userBaru + "' telah siap digunakan.");
+            document.getElementById("registerForm").reset();
+            bukaLogin();
+        }
+
+        function prosesLogin(event) {
+            event.preventDefault();
+
+            var userInput = document.getElementById("username").value.trim();
+            var passInput = document.getElementById("password").value;
+
+            var registeredUser = localStorage.getItem("akun_username");
+            var registeredPass = localStorage.getItem("akun_password");
+            var registeredName = localStorage.getItem("akun_nama");
+
+            var loginSukses = false;
+            var namaTampilan = "";
+
+            if (registeredUser && userInput === registeredUser && passInput === registeredPass) {
+                loginSukses = true;
+                namaTampilan = registeredName;
+            } 
+            else if (userInput === "heri" && passInput === "123") {
+                loginSukses = true;
+                namaTampilan = "Heri";
+            }
+
+            if (loginSukses) {
+                sessionStorage.setItem("statusLogin", "sukses");
+                localStorage.setItem("session_nama", namaTampilan);
+                
+                document.getElementById("welcomeName").innerText = namaTampilan;
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("portalImage").style.display = "none";
+                document.getElementById("welcomeScreen").style.display = "block";
+
+                // PERBAIKAN UTAMA: Menghapus ../ karena file login.html sudah di luar, sejajar dengan home.html
+                setTimeout(function() {
+                    window.location.href = "home.html";
+                }, 3000);
+
+            } else {
+                alert("Username atau Password salah! Silakan coba lagi atau buat akun baru di menu Register.");
+            }
+        }
+    </script>
+
+</body>
+</html>
